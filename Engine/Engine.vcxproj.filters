@@ -1,0 +1,50 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Utils">
+      <UniqueIdentifier>{fb4de581-b8fd-461f-9790-ce6d40db1217}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Default">
+      <UniqueIdentifier>{ce814abe-e460-469b-8347-50ae0f6a8d82}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalFile">
+      <UniqueIdentifier>{74f6b41f-edbb-42a9-8d1e-4e676176ba81}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ExternalFile\Texture">
+      <UniqueIdentifier>{cbe5becf-b945-4235-a3f3-18c72fc3224e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="framework.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="pch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\dx\d3d11\Client\Library\Include\d3dxGlobal.h">
+      <Filter>ExternalFile\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.h">
+      <Filter>ExternalFile\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePch.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="pch.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="EnginePch.cpp">
+      <Filter>Utils</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.inl">
+      <Filter>ExternalFile\Texture</Filter>
+    </None>
+  </ItemGroup>
+</Project>

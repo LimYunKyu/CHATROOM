@@ -20,8 +20,6 @@ public:
 	bool ScreenResize();
 	void CreateDepthStencilView();
 	void CreateSampleState();
-	void CreateBuffer();
-	void CreateVertexShaderFile(const wstring& path, const string& name, const string& version);
 	void CreateShaderFile(const wstring& path);
 	void CreateVertexBuffer();
 

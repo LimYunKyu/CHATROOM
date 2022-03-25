@@ -13,3 +13,10 @@ struct WindowInfo
 	bool  windowed;
 
 };
+
+
+struct Vertex
+{
+	XMFLOAT3 Pos;
+	XMFLOAT2 Tex;
+};

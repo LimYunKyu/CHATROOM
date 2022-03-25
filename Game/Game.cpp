@@ -4,8 +4,10 @@
 #include "pch.h"
 #include "framework.h"
 #include "Game.h"
+#include "GameMain.h"
 
 
+unique_ptr<GameMain> GGameMain;
 #define MAX_LOADSTRING 100
 
 // 전역 변수:
@@ -18,6 +20,8 @@ ATOM                MyRegisterClass(HINSTANCE hInstance);
 BOOL                InitInstance(HINSTANCE, int);
 LRESULT CALLBACK    WndProc(HWND, UINT, WPARAM, LPARAM);
 INT_PTR CALLBACK    About(HWND, UINT, WPARAM, LPARAM);
+WindowInfo GWinfo = {};
+
 
 int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
                      _In_opt_ HINSTANCE hPrevInstance,
@@ -44,14 +48,32 @@ int APIENTRY wWinMain(_In_ HINSTANCE hInstance,
 
     MSG msg;
 
+    GGameMain = make_unique<GameMain>();
+
+    if(!GGameMain->Initialize(GWinfo))
+        MessageBox(0, L"GameMain Initialize Failed!", 0, 0);
+
+
     // 기본 메시지 루프입니다:
-    while (GetMessage(&msg, nullptr, 0, 0))
+    while (true)
     {
-        if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+        if (PeekMessage(&msg, nullptr, 0, 0, PM_REMOVE))
         {
-            TranslateMessage(&msg);
-            DispatchMessage(&msg);
+            if (msg.message == WM_QUIT)
+                break;
+
+            if (!TranslateAccelerator(msg.hwnd, hAccelTable, &msg))
+            {
+                TranslateMessage(&msg);
+                DispatchMessage(&msg);
+            }
         }
+
+        // TODO
+        if(!GGameMain->Update())
+            MessageBox(0, L"GameMain Update Failed!", 0, 0);
+        if(!GGameMain->Render())
+            MessageBox(0, L"GameMain Render Failed!", 0, 0);
     }
 
     return (int) msg.wParam;
@@ -78,7 +100,7 @@ ATOM MyRegisterClass(HINSTANCE hInstance)
     wcex.hIcon          = LoadIcon(hInstance, MAKEINTRESOURCE(IDI_GAME));
     wcex.hCursor        = LoadCursor(nullptr, IDC_ARROW);
     wcex.hbrBackground  = (HBRUSH)(COLOR_WINDOW+1);
-    wcex.lpszMenuName   = MAKEINTRESOURCEW(IDC_GAME);
+    wcex.lpszMenuName   = nullptr;
     wcex.lpszClassName  = szWindowClass;
     wcex.hIconSm        = LoadIcon(wcex.hInstance, MAKEINTRESOURCE(IDI_SMALL));
 
@@ -99,9 +121,13 @@ BOOL InitInstance(HINSTANCE hInstance, int nCmdShow)
 {
    hInst = hInstance; // 인스턴스 핸들을 전역 변수에 저장합니다.
 
-   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
-      CW_USEDEFAULT, 0, CW_USEDEFAULT, 0, nullptr, nullptr, hInstance, nullptr);
+   GWinfo.ClientWidth = 800;
+   GWinfo.ClientHeight = 600;
+   GWinfo.windowed = true;
 
+   HWND hWnd = CreateWindowW(szWindowClass, szTitle, WS_OVERLAPPEDWINDOW,
+      CW_USEDEFAULT, 0, GWinfo.ClientWidth, GWinfo.ClientHeight, nullptr, nullptr, hInstance, nullptr);
+   GWinfo.hWnd = hWnd;
    if (!hWnd)
    {
       return FALSE;
@@ -155,6 +181,15 @@ LRESULT CALLBACK WndProc(HWND hWnd, UINT message, WPARAM wParam, LPARAM lParam)
     case WM_DESTROY:
         PostQuitMessage(0);
         break;
+    case WM_SIZE:
+        if (GGameMain.get() != nullptr)
+        {
+            GWinfo.ClientWidth = LOWORD(lParam);
+            GWinfo.ClientHeight = HIWORD(lParam);
+
+            if(!GGameMain->ScreenResize())
+                MessageBox(0, L"ScreenResize Fail!", 0, 0);
+        }
     default:
         return DefWindowProc(hWnd, message, wParam, lParam);
     }

@@ -27,6 +27,9 @@
 #include "DirectXTex.inl"
 
 
+#include "Define.h"
+#include "Struct.h"
+
 using namespace DirectX;
 using namespace DirectX::PackedVector;
 using namespace Microsoft::WRL;

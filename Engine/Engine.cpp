@@ -1,10 +1,50 @@
-﻿// Engine.cpp : 정적 라이브러리를 위한 함수를 정의합니다.
-//
-
 #include "pch.h"
-#include "framework.h"
+#include "Engine.h"
+#include "GraphcisProcessor.h"
 
-// TODO: 라이브러리 함수의 예제입니다.
-void fnEngine()
+Engine::Engine()
 {
+}
+
+Engine::~Engine()
+{
+}
+
+bool Engine::Initialize(WindowInfo& winfo)
+{
+    mWinfo = winfo;
+    mGraphicsProcessor = make_shared<GraphcisProcessor>();
+    if (!mGraphicsProcessor->Initialize())
+        return false;
+
+
+    return true;
+}
+
+bool Engine::Update()
+{
+    if (!mGraphicsProcessor->Update())
+        return false;
+    return true;
+}
+
+bool Engine::Render()
+{
+    mGraphicsProcessor->RenderBegin();
+   
+
+    //������ ���� �ڵ�
+
+
+    mGraphicsProcessor->RenderEnd();
+  
+
+    return true;
+}
+
+
+
+bool Engine::ScreenResize()
+{
+    return mGraphicsProcessor->ScreenResize();
 }

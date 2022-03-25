@@ -13,6 +13,9 @@
     <Filter Include="ExternalFile\Texture">
       <UniqueIdentifier>{cbe5becf-b945-4235-a3f3-18c72fc3224e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Graphics">
+      <UniqueIdentifier>{d4fe2eb1-8a9f-4beb-b738-a44c1982733d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -27,19 +30,34 @@
     <ClInclude Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.h">
       <Filter>ExternalFile\Texture</Filter>
     </ClInclude>
-    <ClInclude Include="EnginePch.h">
+    <ClInclude Include="Define.h">
       <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="EnginePch.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.h">
+      <Filter>Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine.h">
+      <Filter>Default</Filter>
+    </ClInclude>
+    <ClInclude Include="GraphcisProcessor.h">
+      <Filter>Graphics</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Engine.cpp">
-      <Filter>Default</Filter>
-    </ClCompile>
     <ClCompile Include="pch.cpp">
       <Filter>Default</Filter>
     </ClCompile>
     <ClCompile Include="EnginePch.cpp">
-      <Filter>Utils</Filter>
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="Engine.cpp">
+      <Filter>Default</Filter>
+    </ClCompile>
+    <ClCompile Include="GraphcisProcessor.cpp">
+      <Filter>Graphics</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

@@ -16,6 +16,9 @@
     <Filter Include="Graphics">
       <UniqueIdentifier>{d4fe2eb1-8a9f-4beb-b738-a44c1982733d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Shader">
+      <UniqueIdentifier>{14c29046-e235-4952-bb24-92145f4f3404}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -64,5 +67,10 @@
     <None Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.inl">
       <Filter>ExternalFile\Texture</Filter>
     </None>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Shader\Tutorial.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

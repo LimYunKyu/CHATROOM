@@ -30,13 +30,13 @@ bool Engine::Update()
 
 bool Engine::Render()
 {
-    mGraphicsProcessor->RenderBegin();
+   // mGraphicsProcessor->RenderBegin();
    
 
     //ÄÁÅÙÃ÷ ·£´õ ÄÚµå
+    mGraphicsProcessor->Render();
 
-
-    mGraphicsProcessor->RenderEnd();
+    //mGraphicsProcessor->RenderEnd();
   
 
     return true;

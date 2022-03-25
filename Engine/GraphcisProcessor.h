@@ -13,12 +13,19 @@ public:
 	void RenderBegin();
 
 public:
-	bool CreateDevice();
-	bool CreateSwapChain();
+
+	bool CreateDeviceAndSwapChain();
+
 	void SetUpViewPort();
 	bool ScreenResize();
 	void CreateDepthStencilView();
 	void CreateSampleState();
+	void CreateBuffer();
+	void CreateVertexShaderFile(const wstring& path, const string& name, const string& version);
+	void CreateShaderFile(const wstring& path);
+	void CreateVertexBuffer();
+
+
 private:
 
 	ID3D11Device* mDevice;
@@ -35,19 +42,24 @@ private:
 	ID3D11Buffer* mIndexBuffer;
 	ID3D11Buffer* mConstantBuffer = NULL;
 
-	
+	ID3D11InputLayout* mVertexLayout = NULL;
 
 	IDXGIDevice* mdxgiDevice;
 	IDXGIAdapter* mdxgiAdapter;
 	IDXGIFactory* mdxgiFactory;
-
+	ID3D11VertexShader* mVertexShader;
+	ID3D11PixelShader* mPixelShader;
 	ID3DBlob* VSblob;
 	ID3DBlob* _errBlob;
-
+	ID3D11InputLayout* mInputLayout;
 	D3D_DRIVER_TYPE				md3dDriverType = D3D_DRIVER_TYPE_HARDWARE;
 	UINT						m4xMsaaQuality = 0;
 	bool						mEnable4xMsaa = false;
 	int                         check = 0;
 
+	D3D_DRIVER_TYPE         mdriverType = D3D_DRIVER_TYPE_NULL;
+	D3D_FEATURE_LEVEL       mfeatureLevel = D3D_FEATURE_LEVEL_11_0;
+	UINT32								mVertexCount = 0;
+	UINT32								mIndexCount = 0;
 };
 

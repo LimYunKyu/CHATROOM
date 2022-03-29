@@ -4,6 +4,9 @@ enum class OBJECT_TYPE
 {
 	GAMEOBJECT,
 	COMPONENT,
+	SHADER,
+	MATERIAL,
+	MESH,
 	TEXTURE,
 	NONE,
 	END,
@@ -26,6 +29,9 @@ public:
 	virtual void Update();
 	virtual void LateUpdate();
 	virtual void Render();
+
+public:
+	virtual void Load();
 
 public:
 	OBJECT_TYPE GetOBJTYPE() { return mObjectType; }

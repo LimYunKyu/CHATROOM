@@ -1,4 +1,7 @@
 #pragma once
+
+
+
 class GraphcisProcessor
 {
 
@@ -20,27 +23,29 @@ public:
 	bool ScreenResize();
 	void CreateDepthStencilView();
 	void CreateSampleState();
-	void CreateShaderFile(const wstring& path);
-	void CreateVertexBuffer();
 
 
+public:
+	ID3D11Device* GetDevice() { return mDevice; }
+	ID3D11DeviceContext* GetDeviceContext() { return mDeviceContext; }
+	
+	
 private:
 
 	ID3D11Device* mDevice;
 	ID3D11DeviceContext* mDeviceContext;
 	IDXGISwapChain* mSwapChain;
-	ID3D11Texture2D* mDepthStencilBuffer;
+	ID3D11Texture2D* mDepthStencilBuffer = nullptr;
 	ID3D11Texture2D* mBackBuffer;
 	ID3D11RenderTargetView* mRenderTargetView;
 	ID3D11DepthStencilView* mDepthStencilView;
 	D3D11_VIEWPORT			mViewPort;
 	ID3D11SamplerState* mSamplerState = NULL;
 
-	ID3D11Buffer* mVertexBuffer;
-	ID3D11Buffer* mIndexBuffer;
-	ID3D11Buffer* mConstantBuffer = NULL;
+	
+	ID3D11DepthStencilState* mDepthStencilState;
 
-	ID3D11InputLayout* mVertexLayout = NULL;
+	
 
 	IDXGIDevice* mdxgiDevice;
 	IDXGIAdapter* mdxgiAdapter;
@@ -59,5 +64,9 @@ private:
 	D3D_FEATURE_LEVEL       mfeatureLevel = D3D_FEATURE_LEVEL_11_0;
 	UINT32								mVertexCount = 0;
 	UINT32								mIndexCount = 0;
+
+
+
+
 };
 

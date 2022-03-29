@@ -3,5 +3,7 @@
 class Collision :
     public Component
 {
+public:
+    Collision();
 };
 

@@ -3,10 +3,13 @@
 
 enum class COMPONENT_TYPE
 {
+   
     TRANSFORM,
     COLLISION,
-    ANIMATOR,
+    UI,
     CAMARA,
+    ANIMATOR,
+    MONOBEHAVIOUR,
     END,
 
 };
@@ -20,9 +23,12 @@ public:
 
 public:
     COMPONENT_TYPE GetComponentType() { return mComponentType; }
-
+public:
+    void SetGameObject(shared_ptr<class GameObject> object) { mGameObject = object; }
+    
 protected:
     COMPONENT_TYPE mComponentType;
+    weak_ptr<class GameObject> mGameObject;
 
 };
 

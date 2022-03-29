@@ -3,5 +3,10 @@
 class MonoBehaviour :
     public Component
 {
+
+public:
+    MonoBehaviour();
+
+
 };
 

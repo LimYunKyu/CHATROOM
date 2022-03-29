@@ -28,6 +28,18 @@
     <Filter Include="Object\Component">
       <UniqueIdentifier>{334b56cc-80a1-44a7-8dd3-b7aba07ca4cf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Resource">
+      <UniqueIdentifier>{1776b8d0-9f67-4e95-817c-8715ad458c1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Manager">
+      <UniqueIdentifier>{1f698322-e066-412f-80b0-ae3f36bc5058}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Object\Script">
+      <UniqueIdentifier>{3aae7890-61e9-4830-8302-8c2ca8330f1e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Buffer">
+      <UniqueIdentifier>{7760909d-466e-47cc-ac4c-ce06c919d60f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -81,6 +93,43 @@
     <ClInclude Include="MonoBehaviour.h">
       <Filter>Object\Component</Filter>
     </ClInclude>
+    <ClInclude Include="Texture.h">
+      <Filter>Object\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Mesh.h">
+      <Filter>Object\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="InputManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraScript.h">
+      <Filter>Object\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Timer.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="BufferManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="Material.h">
+      <Filter>Object\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="Shader.h">
+      <Filter>Object\Resource</Filter>
+    </ClInclude>
+    <ClInclude Include="ResourceManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ConstantBuffer.h">
+      <Filter>Buffer</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerScript.h">
+      <Filter>Object\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -119,6 +168,43 @@
     <ClCompile Include="MonoBehaviour.cpp">
       <Filter>Object\Component</Filter>
     </ClCompile>
+    <ClCompile Include="Texture.cpp">
+      <Filter>Object\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Mesh.cpp">
+      <Filter>Object\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="InputManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraScript.cpp">
+      <Filter>Object\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Timer.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="BufferManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="Material.cpp">
+      <Filter>Object\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="Shader.cpp">
+      <Filter>Object\Resource</Filter>
+    </ClCompile>
+    <ClCompile Include="ResourceManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ConstantBuffer.cpp">
+      <Filter>Buffer</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerScript.cpp">
+      <Filter>Object\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.inl">
@@ -129,5 +215,10 @@
     <FxCompile Include="..\Shader\Tutorial.fx">
       <Filter>Shader</Filter>
     </FxCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Texture\Font\font.dds">
+      <Filter>ExternalFile</Filter>
+    </Image>
   </ItemGroup>
 </Project>

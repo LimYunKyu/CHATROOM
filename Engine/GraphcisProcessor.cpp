@@ -1,7 +1,11 @@
 #include "pch.h"
 #include "GraphcisProcessor.h"
 #include "Engine.h"
-
+#include "GameObject.h"
+#include "Transform.h"
+#include "Mesh.h"
+#include "Animator.h"
+#include "ResourceManager.h"
 struct SimpleVertex
 {
 	XMFLOAT3 Pos;
@@ -31,10 +35,9 @@ bool GraphcisProcessor::Initialize()
 	
 	CreateDeviceAndSwapChain();
 	SetUpViewPort();
-	CreateShaderFile(L"..\\Shader\\Tutorial.fx");
-	CreateVertexBuffer();
-	CreateDepthStencilView();
 
+	CreateDepthStencilView();
+	
 
 	return true;
 }
@@ -50,6 +53,11 @@ bool GraphcisProcessor::Render()
 {
 	RenderBegin();
 
+
+
+
+
+
 	RenderEnd();
 
 	return true;
@@ -59,16 +67,13 @@ void GraphcisProcessor::RenderBegin()
 {
 	mDeviceContext->ClearDepthStencilView(mDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	 // Clear the back buffer 
-	float ClearColor[4] = { 0.0f, 0.125f, 0.3f, 1.0f }; // red,green,blue,alpha
+	float ClearColor[4] = { 0.2f, 0.4f, 0.8f, 1.0f }; // red,green,blue,alpha
+	mDeviceContext->PSSetSamplers(0, 1, &mSamplerState);
 	mDeviceContext->OMSetRenderTargets(1, &mRenderTargetView, mDepthStencilView);
+	mDeviceContext->OMSetDepthStencilState(mDepthStencilState, 1);
 	mDeviceContext->ClearRenderTargetView(mRenderTargetView, ClearColor);
 	
-	// Render a triangle
-	mDeviceContext->VSSetShader(mVertexShader, NULL, 0);
-	mDeviceContext->PSSetShader(mPixelShader, NULL, 0);
-	mDeviceContext->DrawIndexed(mIndexCount,0, 0);
 
-	
 }
 
 void GraphcisProcessor::RenderEnd()
@@ -152,8 +157,8 @@ bool GraphcisProcessor::CreateDeviceAndSwapChain()
 
 void GraphcisProcessor::SetUpViewPort()
 {
-	mViewPort.TopLeftX = 0;
-	mViewPort.TopLeftY = 0;
+	mViewPort.TopLeftX = 0.f;
+	mViewPort.TopLeftY = 0.f;
 	mViewPort.Width = static_cast<float>(WINFO.ClientWidth);
 	mViewPort.Height = static_cast<float>(WINFO.ClientHeight);
 	mViewPort.MinDepth = 0.0f;
@@ -186,148 +191,6 @@ void GraphcisProcessor::CreateSampleState()
 }
 
 
-
-void GraphcisProcessor::CreateShaderFile(const wstring& path)
-{
-	HRESULT HR;
-
-	UINT32 compileFlag = 0;
-#ifdef _DEBUG
-	compileFlag = D3DCOMPILE_DEBUG | D3DCOMPILE_SKIP_OPTIMIZATION;
-#endif
-
-
-	ID3DBlob* VSblob;
-	ID3DBlob* ERRblob;
-
-	const D3D_SHADER_MACRO defines[] =
-	{
-		"EXAMPLE_DEFINE", "1",
-		NULL, NULL
-	};
-
-	if (FAILED(HR = ::D3DCompileFromFile(path.c_str(), defines, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, "VS_Main", "vs_5_0", compileFlag, 0, &VSblob, &ERRblob)))
-	{
-		::MessageBoxA(nullptr, "Vertex Shader Create Failed !", nullptr, MB_OK);
-	}
-
-	if (ERRblob)
-	{
-		OutputDebugStringA(reinterpret_cast<const char*>(ERRblob->GetBufferPointer()));
-		MessageBox(GEngine->GetWinfo().hWnd, L"error compiling shader", path.c_str(), MB_OK);
-	}
-
-	HR = mDevice->CreateVertexShader(VSblob->GetBufferPointer(), VSblob->GetBufferSize(), NULL, &mVertexShader);
-
-	// Define the input layout
-	D3D11_INPUT_ELEMENT_DESC layout[] =
-	{
-		{ "POSITION", 0, DXGI_FORMAT_R32G32B32_FLOAT, 0, 0, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-		{ "TEXCOORD", 0, DXGI_FORMAT_R32G32_FLOAT, 0, 12, D3D11_INPUT_PER_VERTEX_DATA, 0 },
-	};
-	UINT numElements = ARRAYSIZE(layout);
-
-	// Create the input layout
-	mDevice->CreateInputLayout(layout, numElements, VSblob->GetBufferPointer(),
-		VSblob->GetBufferSize(), &mVertexLayout);
-
-	//VSblob->Release();
-
-	mDeviceContext->IASetInputLayout(mVertexLayout);
-	
-	ID3DBlob* PSblob;
-
-	if (FAILED(HR = ::D3DCompileFromFile(path.c_str(), defines, D3D_COMPILE_STANDARD_FILE_INCLUDE
-		, "PS_Main", "ps_5_0", compileFlag, 0, &PSblob, &ERRblob)))
-	{
-		::MessageBoxA(nullptr, "Vertex Shader Create Failed !", nullptr, MB_OK);
-	}
-
-
-	mDevice->CreatePixelShader(PSblob->GetBufferPointer(), PSblob->GetBufferSize(), NULL, &mPixelShader);
-	PSblob->Release();
-	
-
-
-}
-
-void GraphcisProcessor::CreateVertexBuffer()
-{
-	float w2 = 0.5f;
-	float h2 = 0.5f;
-
-
-	// Create vertex buffer
-	
-	vector<Vertex> vertices =
-	{
-		{XMFLOAT3(-w2, -h2, 0.5f),XMFLOAT2(0.f,0.f)},
-		{XMFLOAT3(-w2, +h2, 0.5f),XMFLOAT2(1.f,0.f)},
-		{XMFLOAT3(+w2, +h2, 0.5f),XMFLOAT2(1.f,1.f)},
-		{XMFLOAT3(+w2, -h2, 0.5f),XMFLOAT2(0.f,1.f)},
-
-	};
-
-
-
-
-
-
-	D3D11_BUFFER_DESC bd;
-	ZeroMemory(&bd, sizeof(bd));
-	bd.Usage = D3D11_USAGE_DEFAULT;
-	bd.ByteWidth = sizeof(Vertex) *vertices.size() ;
-	bd.BindFlags = D3D11_BIND_VERTEX_BUFFER;
-	bd.CPUAccessFlags = 0;
-	D3D11_SUBRESOURCE_DATA InitData;
-	ZeroMemory(&InitData, sizeof(InitData));
-	InitData.pSysMem = &(vertices[0]);
-	mDevice->CreateBuffer(&bd, &InitData, &mVertexBuffer);
-	
-
-	// Set vertex buffer
-	UINT stride = sizeof(Vertex);
-	UINT offset = 0;
-	mDeviceContext->IASetVertexBuffers(0, 1, &mVertexBuffer, &stride, &offset);
-
-
-	vector<UINT32> idx(6);
-
-	// 앞면
-	idx[0] = 0; idx[1] = 1; idx[2] = 2;
-	idx[3] = 0; idx[4] = 2; idx[5] = 3;
-
-
-	D3D11_BUFFER_DESC ibd;
-	ibd.Usage = D3D11_USAGE_IMMUTABLE;
-	ibd.ByteWidth = sizeof(UINT) * idx.size();
-	ibd.BindFlags = D3D11_BIND_INDEX_BUFFER;
-	ibd.CPUAccessFlags = 0;
-	ibd.MiscFlags = 0;
-	ibd.StructureByteStride = 0;
-	D3D11_SUBRESOURCE_DATA iinitData;
-	iinitData.pSysMem = &(idx[0]);
-
-	mDevice->CreateBuffer(&ibd, &iinitData, &mIndexBuffer);
-
-	mIndexCount = idx.size();
-	mDeviceContext->IASetIndexBuffer(mIndexBuffer, DXGI_FORMAT_R32_UINT, 0);
-
-
-
-
-
-
-
-	// Set primitive topology
-	mDeviceContext->IASetPrimitiveTopology(D3D11_PRIMITIVE_TOPOLOGY_TRIANGLELIST);
-
-
-
-
-}
-
 bool GraphcisProcessor::ScreenResize()
 {
 	return true;
@@ -349,8 +212,16 @@ void GraphcisProcessor::CreateDepthStencilView()
 	descDepth.CPUAccessFlags = 0;
 	descDepth.MiscFlags = 0;
 
+	//2d를 위해서는 z버퍼를 꺼줘야한다.
+	D3D11_DEPTH_STENCIL_DESC DSState;
+	DSState.DepthEnable = FALSE;
+	DSState.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
+	DSState.DepthFunc = D3D11_COMPARISON_LESS;
+
+	mDevice->CreateDepthStencilState(&DSState, &mDepthStencilState);
 	
 	mDevice->CreateTexture2D(&descDepth, NULL, &mDepthStencilBuffer);
-	mDevice->CreateDepthStencilView(mDepthStencilBuffer, nullptr, &mDepthStencilView);
+
+	mDevice->CreateDepthStencilView(mDepthStencilBuffer,nullptr, &mDepthStencilView);
 
 }

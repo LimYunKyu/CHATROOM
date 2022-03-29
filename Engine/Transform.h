@@ -10,6 +10,7 @@ public:
 public:
     void Update();
     void LateUpdate();
+    void Render();
 public:
     const XMFLOAT3 GetPosition() { return mPos; }
     const XMFLOAT3 GetScale() { return mScale; }
@@ -28,7 +29,8 @@ public:
     void SetAddScale(XMFLOAT3 _scale); 
     void SetAddRotation(XMFLOAT3 _rotation);
 
-
+public:
+    void PushData();
   
 
 private:

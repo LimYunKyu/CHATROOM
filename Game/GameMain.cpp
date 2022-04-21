@@ -3,6 +3,8 @@
 #include "Engine.h"
 
 
+
+
 GameMain::GameMain()
 {
 }
@@ -13,8 +15,7 @@ GameMain::~GameMain()
 
 bool GameMain::Initialize(WindowInfo& info)
 {
-
-    return GEngine->Initialize(info);
+    return GEngine->Initialize(info);;
 }
 
 bool GameMain::Update()
@@ -30,4 +31,16 @@ bool GameMain::Render()
 bool GameMain::ScreenResize()
 {
     return GEngine->ScreenResize();
+}
+
+void GameMain::SendText(TCHAR text)
+{
+    GEngine->SendText(text);
+
+}
+
+void GameMain::PleaseDisconnect()
+{
+
+    GEngine->ExitProgram();
 }

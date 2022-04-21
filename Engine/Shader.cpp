@@ -92,6 +92,7 @@ void Shader::CreatePixelShaderFile(const wstring& path, const string& name, cons
 void Shader::BindShader()
 {
 
+	
 	GEngine->GetGraphicsProcessor()->GetDeviceContext()->VSSetShader(mVertexShader, NULL, 0);
 	GEngine->GetGraphicsProcessor()->GetDeviceContext()->PSSetShader(mPixelShader, NULL, 0);
 

@@ -40,6 +40,18 @@
     <Filter Include="Buffer">
       <UniqueIdentifier>{7760909d-466e-47cc-ac4c-ce06c919d60f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Object\Scene">
+      <UniqueIdentifier>{9fd16079-f0b7-44af-860a-932a2ea40753}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Protocol">
+      <UniqueIdentifier>{f5c2810c-5d81-45db-80e9-2b2b13bdda8c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Packet">
+      <UniqueIdentifier>{a8fdd48e-1d33-4d2c-9da8-f29eb1ab4bcc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Event">
+      <UniqueIdentifier>{531773ab-44e0-4bad-9144-fae273f87735}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="framework.h">
@@ -49,9 +61,6 @@
       <Filter>Default</Filter>
     </ClInclude>
     <ClInclude Include="..\..\dx\d3d11\Client\Library\Include\d3dxGlobal.h">
-      <Filter>ExternalFile\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.h">
       <Filter>ExternalFile\Texture</Filter>
     </ClInclude>
     <ClInclude Include="Define.h">
@@ -129,7 +138,69 @@
     <ClInclude Include="PlayerScript.h">
       <Filter>Object\Script</Filter>
     </ClInclude>
-    <ClInclude Include="UI.h" />
+    <ClInclude Include="SceneManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="UI.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="Scene.h">
+      <Filter>Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Dungeon.h">
+      <Filter>Object\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatScript.h">
+      <Filter>Object\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="Text.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="ChatManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObjectCollector.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerPacketHandler.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="Struct.pb.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Protocol.pb.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="Enum.pb.h">
+      <Filter>Protocol</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerSession.h">
+      <Filter>Packet</Filter>
+    </ClInclude>
+    <ClInclude Include="ServerTransceiver.h">
+      <Filter>Object\Component</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Libraries\Include\DirectXTex.h">
+      <Filter>ExternalFile\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="ThreadEvent.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="TEventCreatePlayer.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="EventFromThreads.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="TEventCreateOtherPlayer.h">
+      <Filter>Event</Filter>
+    </ClInclude>
+    <ClInclude Include="SpeachBubbleScript.h">
+      <Filter>Object\Script</Filter>
+    </ClInclude>
+    <ClInclude Include="TEventPlayerDisconnect.h">
+      <Filter>Event</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="pch.cpp">
@@ -204,21 +275,95 @@
     <ClCompile Include="PlayerScript.cpp">
       <Filter>Object\Script</Filter>
     </ClCompile>
-    <ClCompile Include="UI.cpp" />
+    <ClCompile Include="SceneManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="UI.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="Scene.cpp">
+      <Filter>Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Dungeon.cpp">
+      <Filter>Object\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatScript.cpp">
+      <Filter>Object\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="Text.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ChatManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObjectCollector.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerPacketHandler.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="Struct.pb.cc">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Protocol.pb.cc">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="Enum.pb.cc">
+      <Filter>Protocol</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerSession.cpp">
+      <Filter>Packet</Filter>
+    </ClCompile>
+    <ClCompile Include="ServerTransceiver.cpp">
+      <Filter>Object\Component</Filter>
+    </ClCompile>
+    <ClCompile Include="ThreadEvent.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="TEventCreatePlayer.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="EventFromThreads.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="TEventCreateOtherPlayer.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
+    <ClCompile Include="SpeachBubbleScript.cpp">
+      <Filter>Object\Script</Filter>
+    </ClCompile>
+    <ClCompile Include="TEventPlayerDisconnect.cpp">
+      <Filter>Event</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.inl">
       <Filter>ExternalFile\Texture</Filter>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <FxCompile Include="..\Shader\Tutorial.fx">
-      <Filter>Shader</Filter>
-    </FxCompile>
+    <None Include="..\Common\Protobuf\bin\Enum.proto">
+      <Filter>Protocol</Filter>
+    </None>
+    <None Include="..\Common\Protobuf\bin\Protocol.proto">
+      <Filter>Protocol</Filter>
+    </None>
+    <None Include="..\Common\Protobuf\bin\Struct.proto">
+      <Filter>Protocol</Filter>
+    </None>
+    <None Include="..\Common\Protobuf\bin\GenPackets.bat">
+      <Filter>Protocol</Filter>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Image Include="..\Texture\Font\font.dds">
       <Filter>ExternalFile</Filter>
     </Image>
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Shader\Text.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
+    <FxCompile Include="..\Shader\Default.fx">
+      <Filter>Shader</Filter>
+    </FxCompile>
   </ItemGroup>
 </Project>

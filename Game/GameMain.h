@@ -11,5 +11,8 @@ public:
 
 	bool ScreenResize();
 
+	void SendText(TCHAR text);
+	void PleaseDisconnect();
+
 };
 

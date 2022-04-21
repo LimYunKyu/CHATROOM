@@ -23,6 +23,7 @@ enum class KEY_TYPE
 
 	LBUTTON = VK_LBUTTON,
 	RBUTTON = VK_RBUTTON,
+	RETURN = VK_RETURN,
 };
 
 enum class KEY_STATE
@@ -47,7 +48,7 @@ class InputManager
 public:
 	void Init(HWND hwnd);
 	void Update();
-
+public:
 	// 누르고 있을 때
 	bool GetButton(KEY_TYPE key) { return GetState(key) == KEY_STATE::PRESS; }
 	// 맨 처음 눌렀을 때
@@ -55,13 +56,32 @@ public:
 	// 맨 처음 눌렀다 뗐을 때
 	bool GetButtonUp(KEY_TYPE key) { return GetState(key) == KEY_STATE::UP; }
 
+	bool GetButton(INT32 key) { return GetState(key) == KEY_STATE::PRESS; }
+
+	bool GetButtonDown(INT32 key) { return GetState(key) == KEY_STATE::DOWN; }
+
 	const POINT& GetMousePos() { return _mousePos; }
 
+	char* GetSentnece() { return sentence; }
+
+	void ReceiveText(TCHAR text);
+
+	void ResetSentence();
+
+	void SetChatOnState(bool state) { _ChatOn = state; }
+
+	bool GetChatSate() { return _ChatOn; }
+	
 private:
 	inline KEY_STATE GetState(KEY_TYPE key) { return _states[static_cast<UINT8>(key)]; }
-
+	inline KEY_STATE GetState(INT32 key) { return _states[key]; }
 private:
 	vector<KEY_STATE> _states;
 	POINT _mousePos = {};
 	HWND _hwnd;
+	bool _ChatOn = false;
+	TCHAR str[256];
+	char sentence[SENTENCE_MAX];
+
+
 };

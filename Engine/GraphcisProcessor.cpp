@@ -65,12 +65,15 @@ bool GraphcisProcessor::Render()
 
 void GraphcisProcessor::RenderBegin()
 {
+
+	
+
 	mDeviceContext->ClearDepthStencilView(mDepthStencilView, D3D11_CLEAR_DEPTH | D3D11_CLEAR_STENCIL, 1.0f, 0);
 	 // Clear the back buffer 
 	float ClearColor[4] = { 0.2f, 0.4f, 0.8f, 1.0f }; // red,green,blue,alpha
 	mDeviceContext->PSSetSamplers(0, 1, &mSamplerState);
-	mDeviceContext->OMSetRenderTargets(1, &mRenderTargetView, mDepthStencilView);
-	mDeviceContext->OMSetDepthStencilState(mDepthStencilState, 1);
+	mDeviceContext->OMSetRenderTargets(1, &mRenderTargetView, nullptr);
+	//mDeviceContext->OMSetDepthStencilState(mDepthStencilState, 1);
 	mDeviceContext->ClearRenderTargetView(mRenderTargetView, ClearColor);
 	
 
@@ -190,6 +193,11 @@ void GraphcisProcessor::CreateSampleState()
 
 }
 
+ID3D11DeviceContext* GraphcisProcessor::GetDeviceContext()
+{
+	 return mDeviceContext; 
+}
+
 
 bool GraphcisProcessor::ScreenResize()
 {
@@ -214,9 +222,9 @@ void GraphcisProcessor::CreateDepthStencilView()
 
 	//2d를 위해서는 z버퍼를 꺼줘야한다.
 	D3D11_DEPTH_STENCIL_DESC DSState;
-	DSState.DepthEnable = FALSE;
+	DSState.DepthEnable = TRUE;
 	DSState.DepthWriteMask = D3D11_DEPTH_WRITE_MASK_ALL;
-	DSState.DepthFunc = D3D11_COMPARISON_LESS;
+	DSState.DepthFunc = D3D11_COMPARISON_ALWAYS;
 
 	mDevice->CreateDepthStencilState(&DSState, &mDepthStencilState);
 	

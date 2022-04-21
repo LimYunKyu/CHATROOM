@@ -28,6 +28,8 @@ public:
     //void SetInputLayout(ID3D11InputLayout* layout) { mInputLayout = layout; }
     void SetVertexBuffer(ID3D11Buffer* vbuffer, int vertexcount) { mVertexBuffer = vbuffer;  mVertexCount = vertexcount; }
     void SetInexBuffer(ID3D11Buffer* ibuffer, int indexcount) { mIndexBuffer = ibuffer;  mIndexCount = indexcount; }
+    void SetVertexCount(UINT32 count) { mVertexCount = count; }
+    void SetIndexCount(UINT32 count) { mIndexCount = count; }
 
 private:
     ID3D11Buffer* mVertexBuffer;

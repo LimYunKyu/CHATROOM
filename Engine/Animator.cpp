@@ -28,8 +28,6 @@ void Animator::Play()
 	int idx = static_cast<int>(FrameTime);
 
 
-	
-
 	FrameTime += (Timer::GetInstance()->GetDeltaTime()) * 10.f;
 
 	if (FrameTime >= AnimCounts[mCurrentState])
@@ -38,11 +36,16 @@ void Animator::Play()
 	
 	PushData(idx);
 	MaterialParams materialData;
+
+	if ((mCurrentState == ANIM_STATE::FONT))
+		return;
+
 	//¿ÞÂÊ0, ¿À¸¥ÂÊ 1
 	if(mDirection == ANIM_DIRECTION::LEFT)
 		materialData.SetTexOn(0, 0);
 	if (mDirection == ANIM_DIRECTION::RIGHT)
 		materialData.SetTexOn(0, 1);
+
 	BufferManager::GetInstance()->GetConstantBuffer(CONSTANT_BUFFER_TYPE::MATERIAL)->PushData(&materialData);
 
 }

@@ -9,6 +9,8 @@ void InputManager::Init(HWND hwnd)
 
 void InputManager::Update()
 {
+
+	
 	HWND hwnd = ::GetActiveWindow();
 	if (hwnd != _hwnd)
 	{
@@ -47,6 +49,59 @@ void InputManager::Update()
 				state = KEY_STATE::NONE;
 		}
 	}
+
+
+}
+
+void InputManager::ReceiveText(TCHAR text)
+{
+	int len = 0;
+
+	if (_ChatOn)
+	{
+		if (text == '\r')
+		{
+
+			return;
+		}//엔터
+			
+
+		len = lstrlen(str);
+
+		if (len > (SENTENCE_MAX))
+			return;
+
+
+		if (text == '\b') //back space
+		{
+			if (len > 0) //현재 글자가 0개가 아니면 
+			{
+				str[len - 1] = 0;
+				len -= 1;
+				
+			}
+			
+		}
+		else
+		{
+			if (len >= (SENTENCE_MAX))
+				return;
+
+
+			str[len] = text;
+			str[len + 1] = 0;
+
+
+		}
+		WideCharToMultiByte(CP_ACP, 0, str, SENTENCE_MAX, sentence, SENTENCE_MAX, NULL, NULL);
+	}
+	
+}
+
+void InputManager::ResetSentence()
+{
+	str[0] = 0;
+	ZeroMemory(sentence, SENTENCE_MAX);
 
 
 }

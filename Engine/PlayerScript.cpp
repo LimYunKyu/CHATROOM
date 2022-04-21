@@ -1,13 +1,13 @@
 #include "pch.h"
 #include "PlayerScript.h"
-
+#include "SceneManager.h"
 #include "Transform.h"
 #include "Camera.h"
 #include "GameObject.h"
 #include "InputManager.h"
 #include "Timer.h"
 #include "Animator.h"
-
+#include "Engine.h"
 
 void PlayerScript::Init()
 {
@@ -19,6 +19,11 @@ void PlayerScript::LateInit()
 
 void PlayerScript::Update()
 {
+
+
+	if (InputManager::GetInstance()->GetChatSate())
+		return;
+
 
 	float DeltaTime = Timer::GetInstance()->GetDeltaTime();
 	float MoveData = 0;
@@ -85,6 +90,32 @@ void PlayerScript::Update()
 
 void PlayerScript::LateUpdate()
 {
+
+	XMFLOAT3 pos = mGameObject.lock()->GetTransform()->GetWorldPosition();
+	XMFLOAT2 currentMapSize = SceneManager::GetInstance()->GetCurrentMapSize();
+
+	if (pos.x >= (currentMapSize.x / 2))
+	{
+		pos.x = (currentMapSize.x / 2);
+	}
+
+	if (pos.x <= -(currentMapSize.x / 2))
+	{
+		pos.x = -(currentMapSize.x / 2);
+	}
+
+	if (pos.y  >= (currentMapSize.y / 2))
+	{
+		pos.y = (currentMapSize.y / 2);
+	}
+
+	if (pos.y <= -(currentMapSize.y / 2))
+	{
+		pos.y = -(currentMapSize.y / 2);
+	}
+
+
+	mGameObject.lock()->GetTransform()->SetWorldPos(pos);
 }
 
 void PlayerScript::Render()

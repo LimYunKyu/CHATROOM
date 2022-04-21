@@ -6,10 +6,12 @@ enum class COMPONENT_TYPE
    
     TRANSFORM,
     COLLISION,
-    UI,
     CAMARA,
     ANIMATOR,
+    TEXT,
+    UI,
     MONOBEHAVIOUR,
+    SERVERTRANSCEIVER,
     END,
 
 };

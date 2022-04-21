@@ -30,6 +30,8 @@ public:
     void SetMapSize(float _x, float _y) { currentMapSize = { _x,_y }; }
 
 public:
+    void SetCameraObject(shared_ptr<class GameObject> _object) { mCameraObject = _object; }
+public:
     static XMMATRIX GetViewMatrix() { return mViewMatrix; }
     static XMMATRIX GetProjectionMatrix() { return mProjectionMatrix; }
 private:
@@ -47,5 +49,7 @@ private:
     static XMMATRIX mProjectionMatrix;
     MapSize currentMapSize = { 0.f,0.f };
 
+private:
+    shared_ptr<class GameObject> mCameraObject;
 };
 

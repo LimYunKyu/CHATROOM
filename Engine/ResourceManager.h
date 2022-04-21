@@ -6,6 +6,7 @@
 #include "Shader.h"
 #include "Texture.h"
 #include "Animator.h"
+#include "Transform.h"
 
 class ResourceManager
 {
@@ -30,14 +31,27 @@ public:
 	void LoadAnimBackGroundTextures(shared_ptr<class Animator> _animator, ANIM_STATE _state, wstring path);
 
 public:
+
+	shared_ptr<class GameObject> CreatePlayer(int id, SessionRef _session);
+	shared_ptr<class GameObject> CreateText(int _textlen,MOVETYPE _type);
+	shared_ptr<class GameObject> CreateSpeachBubble(int id);
+	shared_ptr<class GameObject> CreateOtherPlayer(int id);
+public:
 	void Init();
 private:
 	void CreateDefaultShader();
 	void CreateDefaultMaterial();
 	void LoadTextures(const wstring& path, shared_ptr<Material> material, int count);
+
+private:
+	
+	bool LoadFontDataFromFile(const char* fontFilename);
 private:
 	using KeyObjMap = std::map<wstring/*key*/, shared_ptr<Object>>;
 	array<KeyObjMap, OBJECT_TYPE_COUNT> _resources;
+	shared_ptr<vector<FontType>> fonttypevec;
+	
+	USE_LOCK
 };
 
 template<typename T>

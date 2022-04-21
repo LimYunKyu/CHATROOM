@@ -5,15 +5,15 @@
 enum class ANIM_STATE
 {
     IDLE,
-    IDLE2,
     WALK,
     BACKGROUND,
+    FONT,
 
 };
 
 enum class ANIM_DIRECTION
 {
-
+    NONE,
     LEFT,
     RIGHT
 };
@@ -38,9 +38,12 @@ public:
     void SetMesh(shared_ptr<class Mesh> _material);
     void SetState(ANIM_STATE _state);
     void SetDirection(ANIM_DIRECTION _direction) { mDirection = _direction; }
+public:
     
     void PushData(int idx);
-
+    shared_ptr<class Mesh> GetMesh() { return mMesh; }
+    ANIM_STATE GetAnimState() { return mCurrentState; }
+    ANIM_DIRECTION GetDirState() { return mDirection; }
 private:
    
     map<ANIM_STATE,INT8> AnimCounts;

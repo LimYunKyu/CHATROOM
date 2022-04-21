@@ -14,3 +14,8 @@ public:								\
 
 
 #define WINFO  GEngine->GetWinfo()
+
+
+#define SENTENCE_MAX 80
+#define SPEACHSENTENCE_MAX 40
+#define NAMELENGTH 20

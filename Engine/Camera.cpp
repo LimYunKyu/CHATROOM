@@ -27,7 +27,22 @@ void Camera::LateUpdate()
 {
 
 	
-	XMFLOAT3 pos = mGameObject.lock()->GetTransform()->GetPosition();
+	//XMFLOAT3 parentpos = mGameObject.lock()->GetTransform()->GetPosition();
+
+	XMFLOAT3 parentpos = mGameObject.lock()->GetParentObject()->GetTransform()->GetWorldPosition();
+
+	
+
+	XMFLOAT3 localpos = mGameObject.lock()-> GetTransform()->GetPosition();
+
+	
+
+
+	XMFLOAT3 pos = { parentpos.x + localpos.x, parentpos.y + localpos.y, parentpos.z + localpos.z };
+
+	if (pos.z < 0)
+		int a = 5;
+
 	if (pos.x + (_width / 2) >= (currentMapSize.MapSizeX / 2))
 	{
 		pos.x = (currentMapSize.MapSizeX / 2) - (_width / 2);
@@ -49,11 +64,10 @@ void Camera::LateUpdate()
 	}
 
 
-	XMMATRIX WorldMatrix = XMMatrixTranslation(pos.x, pos.y, -1.0f);
+	XMMATRIX WorldMatrix = XMMatrixTranslation(pos.x, pos.y, pos.z);
 
 	mViewMatrix = XMMatrixInverse(nullptr, WorldMatrix);
 
-	//mProjectionMatrix = ::XMMatrixPerspectiveFovLH(XMConvertToRadians(45.f), _width / _height, _near, _far);
 	mProjectionMatrix = ::XMMatrixOrthographicLH(WINFO.ClientWidth , WINFO.ClientHeight, _near, _far);
 
 }

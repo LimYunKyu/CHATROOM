@@ -27,7 +27,7 @@ public:
 
 public:
 	ID3D11Device* GetDevice() { return mDevice; }
-	ID3D11DeviceContext* GetDeviceContext() { return mDeviceContext; }
+	ID3D11DeviceContext* GetDeviceContext();
 	
 	
 private:
@@ -67,6 +67,6 @@ private:
 
 
 
-
+	USE_LOCK
 };
 

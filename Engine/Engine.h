@@ -8,16 +8,21 @@ public:
 	bool Initialize(WindowInfo& winfo);
 	bool Update();
 	bool Render();
+public:
+	void StartConnectToServer();
+	void SuccessConnect() { isConnected.store(true,memory_order_seq_cst); }
+	void SuccessEnterGame() { isEnterGame = true; }
+
+
+public:
+	void ExitProgram();
 
 public:
 	bool ScreenResize();
 	const WindowInfo GetWinfo() { return mWinfo; }
-	shared_ptr<class GraphcisProcessor> GetGraphicsProcessor() { return mGraphicsProcessor; }
-
-	void CreateFontBuffer(shared_ptr<class Mesh> _mesh, int FontLength);
-	bool UpdateSentence(shared_ptr<class Mesh>, const char* text, int positionX, int positionY);
-	void BuildVertexArray(void*, const char*, float, float);
-
+	shared_ptr<class GraphcisProcessor> GetGraphicsProcessor() { WRITE_LOCK return mGraphicsProcessor; }
+	void SendText(CHAR text);
+	ClientServiceRef GetServerService() { return service; }
 
 private:
 	WindowInfo Garbage = {};
@@ -25,20 +30,17 @@ private:
 
 	shared_ptr<class GraphcisProcessor> mGraphicsProcessor;
 
-	shared_ptr<class GameObject> mPlayer;
-	shared_ptr<class GameObject> mBackGround;
-	shared_ptr<class GameObject> mCamera;
-	shared_ptr<class GameObject> mFont;
+	
 
 	
 private:
 	//Test
 
-	bool LoadFontDataFromFile(const char* fontFilename, const WCHAR* textureFilename);
-	bool LoadFontData(const char* filename);
-
+	atomic<bool> isConnected = false;
+	bool isEnterGame = false;
 	FontType*  mFontType;
 	shared_ptr<class Texture> mFontTextre;
-
+	ClientServiceRef service;
+	USE_LOCK
 };
 

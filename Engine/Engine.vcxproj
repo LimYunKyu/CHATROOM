@@ -72,32 +72,32 @@
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)\Library\Lib\</OutDir>
-    <IncludePath>$(SolutionDir)\Library\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Library\Lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Libraries\Libs\Engine\Debug</OutDir>
+    <IncludePath>$(SolutionDir)ServerCore\;$(SolutionDir)Libraries\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Libraries\Libs\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\Library\Lib\</OutDir>
-    <IncludePath>$(SolutionDir)\Library\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Library\Lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Libraries\Libs\Engine\Release</OutDir>
+    <IncludePath>$(SolutionDir)Libraries\Include\;$(SolutionDir)ServerCore\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Libraries\Libs\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <LinkIncremental>true</LinkIncremental>
-    <OutDir>$(SolutionDir)\Library\Lib\</OutDir>
-    <IncludePath>$(SolutionDir)\Library\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Library\Lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Libraries\Libs\Engine\Debug</OutDir>
+    <IncludePath>$(SolutionDir)ServerCore\;$(SolutionDir)Libraries\Include\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Libraries\Libs\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <LinkIncremental>false</LinkIncremental>
-    <OutDir>$(SolutionDir)\Library\Lib\</OutDir>
-    <IncludePath>$(SolutionDir)\Library\Include\;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)\Library\Lib\;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)Libraries\Libs\Engine\Release</OutDir>
+    <IncludePath>$(SolutionDir)Libraries\Include\;$(SolutionDir)ServerCore\;$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)Libraries\Libs\;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -108,13 +108,16 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>CALL $(SolutionDir)Common\Protobuf\bin\GenPackets.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -127,11 +130,14 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>CALL $(SolutionDir)Common\Protobuf\bin\GenPackets.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -142,13 +148,16 @@
       </SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>CALL $(SolutionDir)Common\Protobuf\bin\GenPackets.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <SDLCheck>true</SDLCheck>
+      <SDLCheck>false</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <PrecompiledHeader>Use</PrecompiledHeader>
@@ -161,22 +170,31 @@
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
+    <PreBuildEvent>
+      <Command>CALL $(SolutionDir)Common\Protobuf\bin\GenPackets.bat</Command>
+    </PreBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="..\..\dx\d3d11\Client\Library\Include\d3dxGlobal.h" />
-    <ClInclude Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.h" />
+    <ClInclude Include="..\Libraries\Include\DirectXTex.h" />
     <ClInclude Include="Animator.h" />
     <ClInclude Include="BufferManager.h" />
     <ClInclude Include="Camera.h" />
     <ClInclude Include="CameraScript.h" />
+    <ClInclude Include="ChatManager.h" />
+    <ClInclude Include="ChatScript.h" />
     <ClInclude Include="Collision.h" />
     <ClInclude Include="Component.h" />
     <ClInclude Include="ConstantBuffer.h" />
     <ClInclude Include="Define.h" />
+    <ClInclude Include="Dungeon.h" />
     <ClInclude Include="Engine.h" />
     <ClInclude Include="EnginePch.h" />
+    <ClInclude Include="Enum.pb.h" />
+    <ClInclude Include="EventFromThreads.h" />
     <ClInclude Include="framework.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameObjectCollector.h" />
     <ClInclude Include="GraphcisProcessor.h" />
     <ClInclude Include="InputManager.h" />
     <ClInclude Include="Material.h" />
@@ -185,11 +203,24 @@
     <ClInclude Include="Object.h" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="PlayerScript.h" />
+    <ClInclude Include="Protocol.pb.h" />
     <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="Scene.h" />
+    <ClInclude Include="SceneManager.h" />
+    <ClInclude Include="ServerPacketHandler.h" />
+    <ClInclude Include="ServerSession.h" />
+    <ClInclude Include="ServerTransceiver.h" />
     <ClInclude Include="Shader.h" />
+    <ClInclude Include="SpeachBubbleScript.h" />
     <ClInclude Include="Struct.h" />
+    <ClInclude Include="Struct.pb.h" />
+    <ClInclude Include="TEventCreateOtherPlayer.h" />
+    <ClInclude Include="TEventCreatePlayer.h" />
+    <ClInclude Include="TEventPlayerDisconnect.h" />
+    <ClInclude Include="Text.h" />
     <ClInclude Include="Texture.h" />
     <ClInclude Include="TextureManager.h" />
+    <ClInclude Include="ThreadEvent.h" />
     <ClInclude Include="Timer.h" />
     <ClInclude Include="Transform.h" />
     <ClInclude Include="UI.h" />
@@ -199,12 +230,23 @@
     <ClCompile Include="BufferManager.cpp" />
     <ClCompile Include="Camera.cpp" />
     <ClCompile Include="CameraScript.cpp" />
+    <ClCompile Include="ChatManager.cpp" />
+    <ClCompile Include="ChatScript.cpp" />
     <ClCompile Include="Collision.cpp" />
     <ClCompile Include="Component.cpp" />
     <ClCompile Include="ConstantBuffer.cpp" />
+    <ClCompile Include="Dungeon.cpp" />
     <ClCompile Include="Engine.cpp" />
     <ClCompile Include="EnginePch.cpp" />
+    <ClCompile Include="Enum.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="EventFromThreads.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameObjectCollector.cpp" />
     <ClCompile Include="GraphcisProcessor.cpp" />
     <ClCompile Include="InputManager.cpp" />
     <ClCompile Include="Material.cpp" />
@@ -218,19 +260,54 @@
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="PlayerScript.cpp" />
+    <ClCompile Include="Protocol.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="Scene.cpp" />
+    <ClCompile Include="SceneManager.cpp" />
+    <ClCompile Include="ServerPacketHandler.cpp" />
+    <ClCompile Include="ServerSession.cpp" />
+    <ClCompile Include="ServerTransceiver.cpp" />
     <ClCompile Include="Shader.cpp" />
+    <ClCompile Include="SpeachBubbleScript.cpp" />
+    <ClCompile Include="Struct.pb.cc">
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">NotUsing</PrecompiledHeader>
+      <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">NotUsing</PrecompiledHeader>
+    </ClCompile>
+    <ClCompile Include="TEventCreateOtherPlayer.cpp" />
+    <ClCompile Include="TEventCreatePlayer.cpp" />
+    <ClCompile Include="TEventPlayerDisconnect.cpp" />
+    <ClCompile Include="Text.cpp" />
     <ClCompile Include="Texture.cpp" />
     <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="ThreadEvent.cpp" />
     <ClCompile Include="Timer.cpp" />
     <ClCompile Include="Transform.cpp" />
     <ClCompile Include="UI.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\dx\d3d11\Client\Library\Include\DirectXTex.inl" />
+    <None Include="..\Common\Protobuf\bin\Enum.proto" />
+    <None Include="..\Common\Protobuf\bin\GenPackets.bat" />
+    <None Include="..\Common\Protobuf\bin\Protocol.proto" />
+    <None Include="..\Common\Protobuf\bin\Struct.proto" />
   </ItemGroup>
   <ItemGroup>
-    <FxCompile Include="..\Shader\Tutorial.fx">
+    <UpToDateCheckInput Include="..\Common\Protobuf\bin\Enum.proto" />
+    <UpToDateCheckInput Include="..\Common\Protobuf\bin\Protocol.proto" />
+    <UpToDateCheckInput Include="..\Common\Protobuf\bin\Struct.proto" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\Texture\Font\font.dds" />
+  </ItemGroup>
+  <ItemGroup>
+    <FxCompile Include="..\Shader\Default.fx">
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Effect</ShaderType>
@@ -240,9 +317,16 @@
       <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
       <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
     </FxCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\Texture\Font\font.dds" />
+    <FxCompile Include="..\Shader\Text.fx">
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">5.0</ShaderModel>
+      <ShaderType Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Effect</ShaderType>
+      <ShaderModel Condition="'$(Configuration)|$(Platform)'=='Release|x64'">5.0</ShaderModel>
+    </FxCompile>
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
